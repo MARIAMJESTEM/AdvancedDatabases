@@ -1,0 +1,31 @@
+{% extends "layoutLogIn.html" %} {% block content %}
+    <div class="center">
+      <h1>Signup</h1>
+      <br />
+      {% with messages = get_flashed_messages() %} {% if messages %}
+      <p class="flash1">{{messages[0]}}</p>
+      {% endif %} {% endwith %}
+      <form method="post">
+        <div class="txt_field">
+          <input type="text" name="username" required />
+          <span></span>
+          <label>Username</label>
+        </div>
+        <div class="txt_field">
+          <input type="text" name="email" required />
+          <span></span>
+          <label>E-mail</label>
+        </div>
+        <div class="txt_field">
+          <input type="password" name="password" required />
+          <span></span>
+          <label>Password</label>
+        </div>
+        <input type="submit" value="Sign Up" />
+        <div class="signup_link">
+          Already have an account? <a href="/login">Log In</a>
+        </div>
+      </form>
+    </div>
+  </body>
+  {% endblock content %}

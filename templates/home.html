@@ -1,0 +1,373 @@
+{% extends "layout.html" %} {% block userTabs %} {% if LoggedIn %}
+<li class="nav-item">
+  <a class="nav-link active mr-4" aria-current="page" href="/userbooks">
+    <i class="bi bi-book"></i>&nbsp;My Books</a
+  >
+</li>
+<li class="nav-item">
+  <a class="nav-link active" aria-current="page" href="/userreviews"
+    ><i class="bi bi-pen"></i>&nbsp;My Reviews</a
+  >
+</li>
+{% endif %} {% endblock %} {% block login_button %} {% if LoggedIn %}
+<div class="d-flex ml-5">
+  <form method="post">
+    <input
+      type="submit"
+      name="action"
+      value="LogOut"
+      class="btn btn-outline-primary"
+    />
+  </form>
+</div>
+{% else %}
+<div class="d-flex ml-5">
+  <button
+    class="btn btn-outline-primary"
+    type="button"
+    onclick="window.location.href='/login'"
+  >
+    Log In
+  </button>
+  <button
+    class="btn btn-outline-primary"
+    type="button"
+    onclick="window.location.href='/signin'"
+    style="margin-right: 10px"
+  >
+    Sign In
+  </button>
+</div>
+{% endif %} {% endblock %} {% block content %}
+<main class="custom-container">
+  <div class="p-4 p-md- mb-4 rounded text-bg-dark line">
+    <div class="col-md-6 offset-md-5 px-0">
+      <h1 class="display-4 fst-italic">
+        Choose a book and open for a new adventure
+      </h1>
+      <p class="lead my-3">
+        “A reader lives a thousand lives before he dies . . . The man who never
+        reads lives only one.” - George R.R. Martin (American novelist and
+        short-story writer)
+      </p>
+    </div>
+  </div>
+  <hr class="hr1" />
+  <h1>See 10 Top Rated Books</h1>
+  <hr class="hr2" />
+  <div class="row mb-2">
+    <div class="col-md-6">
+      <div
+        class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative"
+      >
+        <div class="col p-4 d-flex flex-column position-static">
+          <strong class="d-inline-block mb-2 text-primary">Genre</strong>
+          <h3 class="mb-0">Book Title 1</h3>
+          <br />
+          <p class="card-text mb-auto">
+            Author, maybe some more data, depends what we have in DB
+          </p>
+        </div>
+        <div class="col-auto d-none d-lg-block">
+          <svg
+            class="bd-placeholder-img"
+            width="200"
+            height="250"
+            xmlns="http://www.w3.org/2000/svg"
+            role="img"
+            aria-label="Placeholder: Thumbnail"
+            preserveAspectRatio="xMidYMid slice"
+            focusable="false"
+          >
+            <title>Placeholder</title>
+            <rect width="100%" height="100%" fill="#4080b8" />
+            <text x="40%" y="50%" fill="#eceeef" dy=".4em">Rating</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div
+        class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative"
+      >
+        <div class="col p-4 d-flex flex-column position-static">
+          <strong class="d-inline-block mb-2 text-primary">Genre</strong>
+          <h3 class="mb-0">Book Title 2</h3>
+          <br />
+          <p class="card-text mb-auto">
+            Author, maybe some more data, depends what we have in DB
+          </p>
+        </div>
+        <div class="col-auto d-none d-lg-block">
+          <svg
+            class="bd-placeholder-img"
+            width="200"
+            height="250"
+            xmlns="http://www.w3.org/2000/svg"
+            role="img"
+            aria-label="Placeholder: Thumbnail"
+            preserveAspectRatio="xMidYMid slice"
+            focusable="false"
+          >
+            <title>Placeholder</title>
+            <rect width="100%" height="100%" fill="#4080b8" />
+            <text x="40%" y="50%" fill="#eceeef" dy=".3em">Rating</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mb-2">
+    <div class="col-md-6">
+      <div
+        class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative"
+      >
+        <div class="col p-4 d-flex flex-column position-static">
+          <strong class="d-inline-block mb-2 text-primary">Genre</strong>
+          <h3 class="mb-0">Book Title 1</h3>
+          <br />
+          <p class="card-text mb-auto">
+            Author, maybe some more data, depends what we have in DB
+          </p>
+        </div>
+        <div class="col-auto d-none d-lg-block">
+          <svg
+            class="bd-placeholder-img"
+            width="200"
+            height="250"
+            xmlns="http://www.w3.org/2000/svg"
+            role="img"
+            aria-label="Placeholder: Thumbnail"
+            preserveAspectRatio="xMidYMid slice"
+            focusable="false"
+          >
+            <title>Placeholder</title>
+            <rect width="100%" height="100%" fill="#4080b8" />
+            <text x="40%" y="50%" fill="#eceeef" dy=".3em">Rating</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div
+        class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative"
+      >
+        <div class="col p-4 d-flex flex-column position-static">
+          <strong class="d-inline-block mb-2 text-primary">Genre</strong>
+          <h3 class="mb-0">Book Title 2</h3>
+          <br />
+          <p class="card-text mb-auto">
+            Author, maybe some more data, depends what we have in DB
+          </p>
+        </div>
+        <div class="col-auto d-none d-lg-block">
+          <svg
+            class="bd-placeholder-img"
+            width="200"
+            height="250"
+            xmlns="http://www.w3.org/2000/svg"
+            role="img"
+            aria-label="Placeholder: Thumbnail"
+            preserveAspectRatio="xMidYMid slice"
+            focusable="false"
+          >
+            <title>Placeholder</title>
+            <rect width="100%" height="100%" fill="#4080b8" />
+            <text x="40%" y="50%" fill="#eceeef" dy=".3em">Rating</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mb-2">
+    <div class="col-md-6">
+      <div
+        class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative"
+      >
+        <div class="col p-4 d-flex flex-column position-static">
+          <strong class="d-inline-block mb-2 text-primary">Genre</strong>
+          <h3 class="mb-0">Book Title 1</h3>
+          <br />
+          <p class="card-text mb-auto">
+            Author, maybe some more data, depends what we have in DB
+          </p>
+        </div>
+        <div class="col-auto d-none d-lg-block">
+          <svg
+            class="bd-placeholder-img"
+            width="200"
+            height="250"
+            xmlns="http://www.w3.org/2000/svg"
+            role="img"
+            aria-label="Placeholder: Thumbnail"
+            preserveAspectRatio="xMidYMid slice"
+            focusable="false"
+          >
+            <title>Placeholder</title>
+            <rect width="100%" height="100%" fill="#4080b8" />
+            <text x="40%" y="50%" fill="#eceeef" dy=".3em">Rating</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div
+        class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative"
+      >
+        <div class="col p-4 d-flex flex-column position-static">
+          <strong class="d-inline-block mb-2 text-primary">Genre</strong>
+          <h3 class="mb-0">Book Title 2</h3>
+          <br />
+          <p class="card-text mb-auto">
+            Author, maybe some more data, depends what we have in DB
+          </p>
+        </div>
+        <div class="col-auto d-none d-lg-block">
+          <svg
+            class="bd-placeholder-img"
+            width="200"
+            height="250"
+            xmlns="http://www.w3.org/2000/svg"
+            role="img"
+            aria-label="Placeholder: Thumbnail"
+            preserveAspectRatio="xMidYMid slice"
+            focusable="false"
+          >
+            <title>Placeholder</title>
+            <rect width="100%" height="100%" fill="#4080b8" />
+            <text x="40%" y="50%" fill="#eceeef" dy=".3em">Rating</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mb-2">
+    <div class="col-md-6">
+      <div
+        class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative"
+      >
+        <div class="col p-4 d-flex flex-column position-static">
+          <strong class="d-inline-block mb-2 text-primary">Genre</strong>
+          <h3 class="mb-0">Book Title 1</h3>
+          <br />
+          <p class="card-text mb-auto">
+            Author, maybe some more data, depends what we have in DB
+          </p>
+        </div>
+        <div class="col-auto d-none d-lg-block">
+          <svg
+            class="bd-placeholder-img"
+            width="200"
+            height="250"
+            xmlns="http://www.w3.org/2000/svg"
+            role="img"
+            aria-label="Placeholder: Thumbnail"
+            preserveAspectRatio="xMidYMid slice"
+            focusable="false"
+          >
+            <title>Placeholder</title>
+            <rect width="100%" height="100%" fill="#4080b8" />
+            <text x="40%" y="50%" fill="#eceeef" dy=".3em">Rating</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div
+        class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative"
+      >
+        <div class="col p-4 d-flex flex-column position-static">
+          <strong class="d-inline-block mb-2 text-primary">Genre</strong>
+          <h3 class="mb-0">Book Title 2</h3>
+          <br />
+          <p class="card-text mb-auto">
+            Author, maybe some more data, depends what we have in DB
+          </p>
+        </div>
+        <div class="col-auto d-none d-lg-block">
+          <svg
+            class="bd-placeholder-img"
+            width="200"
+            height="250"
+            xmlns="http://www.w3.org/2000/svg"
+            role="img"
+            aria-label="Placeholder: Thumbnail"
+            preserveAspectRatio="xMidYMid slice"
+            focusable="false"
+          >
+            <title>Placeholder</title>
+            <rect width="100%" height="100%" fill="#4080b8" />
+            <text x="40%" y="50%" fill="#eceeef" dy=".3em">Rating</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-2">
+    <div class="col-md-6">
+      <div
+        class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative"
+      >
+        <div class="col p-4 d-flex flex-column position-static">
+          <strong class="d-inline-block mb-2 text-primary">Genre</strong>
+          <h3 class="mb-0">Book title 10</h3>
+          <br />
+          <p class="card-text mb-auto">
+            Author, maybe some more data, depends what we have in DB
+          </p>
+          <a href="#" class="stretched-link">Continue reading</a>
+        </div>
+        <div class="col-auto d-none d-lg-block">
+          <svg
+            class="bd-placeholder-img"
+            width="200"
+            height="250"
+            xmlns="http://www.w3.org/2000/svg"
+            role="img"
+            aria-label="Placeholder: Thumbnail"
+            preserveAspectRatio="xMidYMid slice"
+            focusable="false"
+          >
+            <title>Placeholder</title>
+            <rect width="100%" height="100%" fill="#4080b8" />
+            <text x="40%" y="50%" fill="#eceeef" dy=".3em">rating</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div
+        class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative"
+      >
+        <div class="col p-4 d-flex flex-column position-static">
+          <strong class="d-inline-block mb-2 text-success">Design</strong>
+          <h3 class="mb-0">Post title</h3>
+          <div class="mb-1 text-body-secondary">Nov 11</div>
+          <p class="mb-auto">
+            This is a wider card with supporting text below as a natural lead-in
+            to additional content.
+          </p>
+          <a href="#" class="stretched-link">Continue reading</a>
+        </div>
+        <div class="col-auto d-none d-lg-block">
+          <svg
+            class="bd-placeholder-img"
+            width="200"
+            height="250"
+            xmlns="http://www.w3.org/2000/svg"
+            role="img"
+            aria-label="Placeholder: Thumbnail"
+            preserveAspectRatio="xMidYMid slice"
+            focusable="false"
+          >
+            <title>Placeholder</title>
+            <rect width="100%" height="100%" fill="#4080b8" />
+            <text x="40%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock content %}
