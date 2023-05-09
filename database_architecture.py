@@ -74,5 +74,23 @@ class Review(Base):
         )
 
 
+class ReadershipStatus(Base):
+    __tablename__ = 'readership_status'
+    id = Column(Integer, primary_key=True)
+    customer_id = Column(Integer, ForeignKey('customer.id'))
+    book_id = Column(Integer, ForeignKey('book.id'))
+    review_id = Column(Integer, ForeignKey("review.id"))
+    status = Column(String(10))
+
+    def __repr__(self):
+        return "<Readership Status(id={0}, customer_id={1} book_id={2}, review_id={3}, status={4})>".format(
+            self.id,
+            self.customer_id,
+            self.book_id,
+            self.review_id,
+            self.status
+        )
+
+
 if __name__ == "__main__":
     Base.metadata.create_all(engine)
