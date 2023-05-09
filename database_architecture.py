@@ -1,7 +1,6 @@
+from sqlalchemy import Column, Integer, String, Date, Float, ForeignKey
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, Integer, String, Date, Float, ForeignKey
-
 
 db_string = "postgresql://postgres:postgres@localhost:5432/advanced_databases"
 engine = create_engine(db_string)
@@ -18,7 +17,13 @@ class Customer(Base):
     register_date = Column(Date)
 
     def __repr__(self):
-        return "<Customer(id={0}, username={1}, password={2}, email={3}, register_date={4})>".format(self.id, self.username, self.password, self.email, self.register_date)
+        return "<Customer(id={0}, username={1}, password={2}, email={3}, register_date={4})>".format(
+            self.id,
+            self.username,
+            self.password,
+            self.email,
+            self.register_date
+        )
 
 
 class BookCategory(Base):
@@ -40,7 +45,13 @@ class Book(Base):
     release_year = Column(Date)
 
     def __repr__(self):
-        return "<Book(id={0}, category_id={1}, title={2}, description={3}, release_year={4})>".format(self.id, self.category_id, self.title, self.description, self.release_year)
+        return "<Book(id={0}, category_id={1}, title={2}, description={3}, release_year={4})>".format(
+            self.id,
+            self.category_id,
+            self.title,
+            self.description,
+            self.release_year
+        )
 
 
 class Review(Base):
@@ -53,7 +64,15 @@ class Review(Base):
     added_date = Column(Date)
 
     def __repr__(self):
-        return "<Review(id={0}, customer_id={1}, book_id={2}, rating={3}, comment={4}, added_date={5})>".format(self.id, self.customer_id, self.book_id, self.rating, self.comment, self.added_date)
+        return "<Review(id={0}, customer_id={1}, book_id={2}, rating={3}, comment={4}, added_date={5})>".format(
+            self.id,
+            self.customer_id,
+            self.book_id,
+            self.rating,
+            self.comment,
+            self.added_date
+        )
 
 
-Base.metadata.create_all(engine)
+if __name__ == "__main__":
+    Base.metadata.create_all(engine)
