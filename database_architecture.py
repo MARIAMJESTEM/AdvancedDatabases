@@ -8,8 +8,8 @@ engine = create_engine(db_string)
 Base = declarative_base()
 
 
-class Customer(Base):
-    __tablename__ = 'customer'
+class User(Base):
+    __tablename__ = 'user'
     id = Column(Integer, primary_key=True)
     username = Column(String(20))
     password = Column(String(20))
@@ -17,7 +17,7 @@ class Customer(Base):
     register_date = Column(Date)
 
     def __repr__(self):
-        return "<Customer(id={0}, username={1}, password={2}, email={3}, register_date={4})>".format(
+        return "<User(id={0}, username={1}, password={2}, email={3}, register_date={4})>".format(
             self.id,
             self.username,
             self.password,
@@ -41,14 +41,16 @@ class Book(Base):
     id = Column(Integer, primary_key=True)
     category_id = Column(Integer, ForeignKey('book_category.id'))
     title = Column(String(40))
+    author = Column(String(40))
     description = Column(String(400))
     release_year = Column(Date)
 
     def __repr__(self):
-        return "<Book(id={0}, category_id={1}, title={2}, description={3}, release_year={4})>".format(
+        return "<Book(id={0}, category_id={1}, title={2}, author={3}, description={4}, release_year={5})>".format(
             self.id,
             self.category_id,
             self.title,
+            self.author,
             self.description,
             self.release_year
         )
@@ -57,16 +59,16 @@ class Book(Base):
 class Review(Base):
     __tablename__ = 'review'
     id = Column(Integer, primary_key=True)
-    customer_id = Column(Integer, ForeignKey('customer.id'))
+    user_id = Column(Integer, ForeignKey('user.id'))
     book_id = Column(Integer, ForeignKey('book.id'))
     rating = Column(Float)
     comment = Column(String(400))
     added_date = Column(Date)
 
     def __repr__(self):
-        return "<Review(id={0}, customer_id={1}, book_id={2}, rating={3}, comment={4}, added_date={5})>".format(
+        return "<Review(id={0}, user_id={1}, book_id={2}, rating={3}, comment={4}, added_date={5})>".format(
             self.id,
-            self.customer_id,
+            self.user_id,
             self.book_id,
             self.rating,
             self.comment,
@@ -77,15 +79,15 @@ class Review(Base):
 class ReadershipStatus(Base):
     __tablename__ = 'readership_status'
     id = Column(Integer, primary_key=True)
-    customer_id = Column(Integer, ForeignKey('customer.id'))
+    user_id = Column(Integer, ForeignKey('user.id'))
     book_id = Column(Integer, ForeignKey('book.id'))
     review_id = Column(Integer, ForeignKey("review.id"))
     status = Column(String(10))
 
     def __repr__(self):
-        return "<Readership Status(id={0}, customer_id={1} book_id={2}, review_id={3}, status={4})>".format(
+        return "<Readership Status(id={0}, user_id={1} book_id={2}, review_id={3}, status={4})>".format(
             self.id,
-            self.customer_id,
+            self.user_id,
             self.book_id,
             self.review_id,
             self.status
