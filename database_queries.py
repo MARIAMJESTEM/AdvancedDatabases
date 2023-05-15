@@ -38,6 +38,34 @@ class DatabaseQueries:
         )
         return True if self.engine.execute(stmt).fetchall() else False
 
+    def check_is_username_taken(self, username: str) -> bool:
+        """
+        Checks if the given username was taken in the database.
+
+        :param username: The name of the user to check.
+
+        :return: True if the username is taken, False otherwise.
+        """
+        stmt = (
+            select([self.user])
+            .where(self.user.columns.username == username)
+        )
+        return True if self.engine.execute(stmt).fetchall() else False
+
+    def check_is_email_taken(self, email: str) -> bool:
+        """
+        Checks if the given email was taken in the database.
+
+        :param email: The name of the user to check.
+
+        :return: True if the email is taken, False otherwise.
+        """
+        stmt = (
+            select([self.user])
+            .where(self.user.columns.email == email)
+        )
+        return True if self.engine.execute(stmt).fetchall() else False
+
     def check_user_password(self, username: str, password: str) -> bool:
         """
         Check if the given password matches the password of the specified user in the database.
