@@ -1,6 +1,7 @@
 import pandas as pd
 from pandas import DataFrame
-from sqlalchemy import MetaData, Table, select, func, desc, update
+from typing import List, Dict, Any
+from sqlalchemy import MetaData, Table, select, func, desc, update, create_engine
 from sqlalchemy.engine import Engine
 from datetime import datetime
 
@@ -10,8 +11,7 @@ class DatabaseQueries:
         """
         A class for performing database queries.
 
-        :param
-            engine (Engine): The SQLAlchemy engine to use for connecting to the database.
+        :param engine: The SQLAlchemy engine to use for connecting to the database.
         """
         self.engine = engine
 
@@ -23,11 +23,10 @@ class DatabaseQueries:
 
     def check_user_exists(self, username: str, email: str) -> bool:
         """
-        Checks if a user with the given username exists in the database.
+        Check if a user with the given username exists in the database.
 
         :param username: The name of the user to check.
-        :param email: the email connected to the username.
-
+        :param email: The email connected to the username.
         :return: True if the user exists in the database, False otherwise.
         """
 
@@ -40,12 +39,12 @@ class DatabaseQueries:
 
     def check_is_username_taken(self, username: str) -> bool:
         """
-        Checks if the given username was taken in the database.
+        Check if the given username was taken in the database.
 
         :param username: The name of the user to check.
-
         :return: True if the username is taken, False otherwise.
         """
+
         stmt = (
             select([self.user])
             .where(self.user.columns.username == username)
@@ -54,12 +53,12 @@ class DatabaseQueries:
 
     def check_is_email_taken(self, email: str) -> bool:
         """
-        Checks if the given email was taken in the database.
+        Check if the given email was taken in the database.
 
         :param email: The name of the user to check.
-
         :return: True if the email is taken, False otherwise.
         """
+
         stmt = (
             select([self.user])
             .where(self.user.columns.email == email)
@@ -72,8 +71,7 @@ class DatabaseQueries:
 
         :param username: The username of the user to check the password for.
         :param password: The password to check for the specified user.
-
-        :return: bool: True if the given password matches the password of the specified user in the database, False otherwise.
+        :return: True if the given password matches the password of the specified user in the database, False otherwise.
         """
 
         stmt = (
@@ -83,60 +81,98 @@ class DatabaseQueries:
         )
         return True if self.engine.execute(stmt).fetchall() else False
 
+    def check_is_title_in_user_database(self, username: str, book_title: str) -> bool:
+        """
+        Check if the given book title exists in the specified user's database.
+
+        :param username: The username of the user to check the database for.
+        :param book_title: The title of the book to check for in the user's database.
+        :return: True if the given book title exists in the user's database, False otherwise.
+        """
+
+        stmt = (
+            select([self.readership_status])
+            .select_from(
+                self.readership_status
+                .join(self.book, self.readership_status.columns.book_id == self.book.columns.id)
+            )
+            .where(self.readership_status.columns.user_id == self.get_user_id(username))
+            .where(self.book.columns.title == book_title)
+        )
+        return True if self.engine.execute(stmt).fetchall() else False
+
     def get_top_rated_books(self, number_of_top_rated_books: int) -> DataFrame:
         """
         Returns a pandas DataFrame containing the top-rated books and their total rating.
 
         :param number_of_top_rated_books: An integer representing the number of selecting top-rated books.
-
-        :return: DataFrame: A pandas DataFrame containing the top-rated books and their total rating.
+        :return: pd.DataFrame: A pandas DataFrame containing the top-rated books and their total rating.
         """
 
         stmt = (
             select([
                 self.book.columns.title,
+                self.book.columns.author,
+                self.book_category.columns.name,
                 self.review.columns.book_id,
                 func.sum(self.review.columns.rating).label('total_rating')
             ])
-            .select_from(self.book.join(self.review, self.book.columns.id == self.review.columns.book_id))
-            .group_by(self.book.columns.title, self.review.columns.book_id)
+            .select_from(
+                self.book
+                .join(self.review, self.book.columns.id == self.review.columns.book_id)
+                .join(self.book_category, self.book_category.columns.id == self.book.columns.category_id)
+            )
+            .group_by(
+                self.book.columns.title,
+                self.book.columns.author,
+                self.book_category.columns.name,
+                self.review.columns.book_id
+            )
             .order_by(desc('total_rating'))
             .limit(number_of_top_rated_books)
         )
         return pd.DataFrame(self.engine.execute(stmt).fetchall())
 
-    def get_user_read_books(self, username: str) -> DataFrame:
+    def get_user_read_books(self, username: str) -> List[Dict]:
         """
-        Returns a DataFrame with titles of all books read by the given user.
+        Returns a list of dictionaries containing the titles of all books read by the given user.
 
         :param username: Username of the user whose read books are to be returned.
-
-        :return: DataFrame: A DataFrame with titles of all books read by the given user.
+        :return: List[Dict]: List of dictionaries with titles, author, genre, and release_year of all books read by the given user.
         """
 
         stmt = (
-            select([self.book.columns.title])
+            select([
+                self.book.columns.title,
+                self.book.columns.author,
+                self.book_category.columns.name.label('genre'),
+                self.book.columns.release_year
+            ])
             .select_from(
                 self.book
                 .join(self.readership_status, self.book.columns.id == self.readership_status.columns.book_id)
                 .join(self.user, self.readership_status.columns.user_id == self.user.columns.id)
+                .join(self.book_category, self.book_category.columns.id == self.book.columns.category_id)
             )
             .where(self.user.columns.username == username)
             .where(self.readership_status.columns.status == 'READ')
         )
-        return pd.DataFrame(self.engine.execute(stmt).fetchall())
+        return pd.DataFrame(self.engine.execute(stmt).fetchall()).to_dict(orient='records')
 
-    def get_user_reviews(self, username: str) -> DataFrame:
+    def get_user_reviews(self, username: str) -> List[Dict]:
         """
-        Returns a DataFrame with reviews for all books read by the given user.
+        Returns a list of dictionaries with reviews for all books read by the given user.
 
         :param username: Username of the user whose reviewed books are to be returned.
-
-        :return: DataFrame: A DataFrame with reviews for all books read by the given user.
+        :return: List[Dict]: List of dictionaries with reviews for all books read by the given user.
         """
 
         stmt = (
-            select([self.review, self.book.columns.title])
+            select([
+                self.book.columns.title,
+                self.review.columns.rating,
+                self.review.columns.comment
+            ])
             .select_from(
                 self.review
                 .join(self.readership_status, self.review.columns.id == self.readership_status.columns.review_id)
@@ -146,25 +182,57 @@ class DatabaseQueries:
             .where(self.user.columns.username == username)
             .where(self.readership_status.columns.status == 'REVIEWED')
         )
-        return pd.DataFrame(self.engine.execute(stmt).fetchall())
+        return pd.DataFrame(self.engine.execute(stmt).fetchall()).to_dict(orient='records')
 
-    def get_selected_book_by_title(self, book_title: str) -> DataFrame:
+    def get_book_reviews(self, book_title: str) -> List[Dict]:
         """
-        Retrieve data from the database about a book with the given title.
+        Retrieves reviews for the book with the given title from the database.
 
-        :param book_title: The title of the book to retrieve data for.
+        :param book_title: The title of the book to retrieve reviews for.
+        :return: A list of dictionaries, where each dictionary contains the following keys:
+                 "book_title", "rating", and "comment".
+        """
+        stmt = (
+            select([
+                self.book.columns.title,
+                self.review.columns.rating,
+                self.review.columns.comment
+            ])
+            .select_from(
+                self.book
+                .join(self.review, self.book.columns.id == self.review.columns.book_id)
+            )
+            .where(self.book.columns.title == book_title)
+        )
 
-        :return: A pandas DataFrame containing data about the book.
+        return pd.DataFrame(self.engine.execute(stmt).fetchall()).to_dict(orient='records')
+
+    def get_search_book_by_title(self, book_title: str) -> List[Any]:
+        """
+        Searches for books in the database that match the given title.
+
+        :param book_title: The title of the book to search for.
+        :return: A list containing information about the matching books, where each item in the list is a tuple with the
+                 following fields: (title, author, description, release_year, category_name).
         """
 
         stmt = (
-            select([self.book, self.book_category])
+            select([
+                self.book.columns.title,
+                self.book.columns.author,
+                self.book.columns.description,
+                self.book.columns.release_year,
+                self.book_category.columns.name
+            ])
             .select_from(
                 self.book.join(self.book_category, self.book.columns.category_id == self.book_category.columns.id)
             )
             .where(func.lower(self.book.columns.title) == book_title.lower())
         )
-        return pd.DataFrame(self.engine.execute(stmt).fetchall())
+        book_information = self.engine.execute(stmt).fetchall()
+        if not book_information:
+            raise ValueError(f"ERROR: no book with the given title was found: '{book_title}'")
+        return list(book_information[0])
 
     def get_new_user_id(self) -> int:
         """
