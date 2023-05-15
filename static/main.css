@@ -114,7 +114,7 @@ form .txt_field {
   left: 0;
   width: 0%;
   height: 2px;
-  background: #2691d9;
+  background: #13be4f;
   transition: 0.5s;
 }
 .txt_field input:focus ~ label,
@@ -176,4 +176,29 @@ form .txt_field {
 }
 .h1_books {
   padding: 2%;
+}
+
+.card-text {
+  max-height: 200px;
+  overflow: auto;
+}
+
+.search_h1 {
+  padding-top: 5%;
+  padding-bottom: 1%;
+  text-align: center;
+  font-size: 48px;
+}
+
+.containe2r {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.desc {
+  max-width: 70%;
+  margin: 0 auto;
+  text-align: center;
 }
