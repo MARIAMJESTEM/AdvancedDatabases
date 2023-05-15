@@ -38,4 +38,50 @@
     Sign In
   </button>
 </div>
-{% endif %} {% endblock %} {% block content %} {% endblock %}
+{% endif %} {% endblock %} {% block content %}
+<main class="custom-container">
+  <div class="container2">
+  <h1 class = "search_h1">{{bookData[0]}}</i></h1>
+  <hr>
+  <div class="desc"><p>{{bookData[2]}}</p> </div>
+  <p>Author: <strong>{{ bookData[1]}}</strong></p>
+  <br>
+  <p>Genre: <strong>{{bookData[3]}}</strong></p>
+  <hr>
+</div>
+<br> <br>
+<h2>Reviews about searched book</h2>
+<br>
+  <div class="row mb-2">
+    {% for review in Reviews %}
+    <div class="col-md-6">
+      <div
+        class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative"
+      >
+        <div class="col p-4 d-flex flex-column position-static">
+          <p class="card-text mb-auto">{{ review['text'] }}</p>
+        </div>
+        <div class="col-auto d-none d-lg-block">
+          <svg
+            class="bd-placeholder-img"
+            width="200"
+            height="250"
+            xmlns="http://www.w3.org/2000/svg"
+            role="img"
+            aria-label="Placeholder: Thumbnail"
+            preserveAspectRatio="xMidYMid slice"
+            focusable="false"
+          >
+            <title>Placeholder</title>
+            <rect width="100%" height="100%" fill="#4080b8" />
+            <text x="40%" y="50%" fill="#eceeef" dy=".3em">
+              {{ review['rating']}}
+            </text>
+          </svg>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</main>
+{% endblock %}
