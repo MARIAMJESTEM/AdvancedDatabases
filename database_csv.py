@@ -16,8 +16,8 @@ df['category_id'] = df['category_id'].map(map_list)
 
 df2 = pd.read+csv('category.csv')
 
-# df.to_sql('book', con = engine, if_exists='replace', index=False)
-# df2.to_sql('book_category', con = engine, if_exists='replace', index=False)
+df.to_sql('book', con = engine, if_exists='append', index=False)
+df2.to_sql('book_category', con = engine, if_exists='append', index=False)
 
 
 
