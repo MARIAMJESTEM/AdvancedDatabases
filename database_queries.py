@@ -197,7 +197,7 @@ class DatabaseQueries:
         :return: None
         """
 
-        insert_stmt = self.user.insert().values(id=self.get_new_readership_status_id(),
+        insert_stmt = self.user.insert().values(id=self.get_new_user_id(),
                                                 username=username,
                                                 password=password,
                                                 email=email,
