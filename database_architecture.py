@@ -43,8 +43,8 @@ class Book(Base):
     title = Column(String(40))
     author = Column(String(40))
     description = Column(String(400))
-    release_year = Column(Integer, primary_key=True)
-
+    release_year = Column(Integer)
+    
     def __repr__(self):
         return "<Book(id={0}, category_id={1}, title={2}, author={3}, description={4}, release_year={5})>".format(
             self.id,
