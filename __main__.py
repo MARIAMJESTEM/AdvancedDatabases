@@ -1,7 +1,8 @@
 import json
 import os
 from typing import List, Any, cast
-
+from sqlalchemy import create_engine
+from database_queries import DatabaseQueries
 from flask import Flask, render_template, request, flash, redirect, url_for
 
 app = Flask(__name__)
@@ -24,8 +25,7 @@ def login():
         global LoggedIn
         username = request.form['username']
         password = request.form['password']
-        # TODO check if given user data is correct
-        LoggedIn = True # Here assign the response from data base
+        LoggedIn = query.check_user_password(username=username, password=password)
         if LoggedIn:
             return redirect(url_for('home'))
         else:
@@ -96,7 +96,7 @@ def userreview():
         {"Title": "Lalka", "Review": "Top książka no złoto po prostu, chce sprawdzić jak dużo tekstu się zachowa w tablei dlatego jescze może coś popisze a w sumie to mogłabym skopiować coś ale jest tak późno że nie myśle o tym już a przynajmniej sbie coś popisze bo pisanie kodu to z pisaniem się rozmywa tu jest pisanie ale do przeglądarki bo cały czas coś nie działa"}
 ]
     columns = ["Title", "Review"]
-    
+
     if request.method == 'POST':
         if "action" in request.form and request.form["action"] == "LogOut":
             LoggedIn = False
@@ -123,5 +123,9 @@ def search():
 
     return render_template('search.html',LoggedIn = LoggedIn)
 
+
 if __name__ == '__main__':
+    db_string = "postgresql://postgres:postgres@localhost:5432/advanced_databases"
+    engine = create_engine(db_string)
+    query = DatabaseQueries(engine)
     app.run(debug=True)
