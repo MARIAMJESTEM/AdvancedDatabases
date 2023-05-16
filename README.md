@@ -11,4 +11,5 @@
 
 
 ## Running:
-- API + Web server: `python __main__.py`
+- Create database and fill it with sample data: `database_architecture.py`
+- Run API + Web server: `python __main__.py`
