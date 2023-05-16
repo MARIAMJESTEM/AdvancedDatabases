@@ -7,9 +7,8 @@
     * `5432` as port
     * `postgres` as maintenance database, username and password
 4. Create a database named `advanced_databases`
-5. Run the `database_architecture.py` script
+5. Run the `database_architecture.py` script to create database and fill it with data
 
 
 ## Running:
-- Create database and fill it with sample data: `database_architecture.py`
-- Run API + Web server: `python __main__.py`
+- API + Web server: `python __main__.py`
