@@ -1,6 +1,7 @@
 from sqlalchemy import Column, Integer, String, Date, Float, ForeignKey
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
+
 from database.database_csv import fill_database_with_data
 from database.database_sample_data_generator import generate_sample_data
 
@@ -46,7 +47,7 @@ class Book(Base):
     author = Column(String(100))
     description = Column(String(6000))
     release_year = Column(Integer)
-    
+
     def __repr__(self):
         return "<Book(id={0}, category_id={1}, title={2}, author={3}, description={4}, release_year={5})>".format(
             self.id,
@@ -100,4 +101,3 @@ if __name__ == "__main__":
     Base.metadata.create_all(engine)
     fill_database_with_data()
     generate_sample_data()
-

@@ -1,15 +1,15 @@
 import pandas as pd
-import numpy as np
-from faker import Faker
-from sqlalchemy import create_engine, Table, Column, Integer, String, MetaData
+from sqlalchemy import create_engine
 from sqlalchemy.engine import Engine
 
 
 class DatabaseUpload:
     def __init__(self, engine: Engine, book_data_csv: str, category_data_csv: str):
         self.engine = engine
-        self.book_df = pd.read_csv(book_data_csv,
-                                   usecols=["id", "category_id", "title", "author", "description", "release_year"])
+        self.book_df = pd.read_csv(
+            book_data_csv,
+            usecols=["id", "category_id", "title", "author", "description", "release_year"]
+        )
         self.category_df = pd.read_csv(category_data_csv)
 
     def upload_data(self):
