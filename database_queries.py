@@ -1,7 +1,7 @@
 import pandas as pd
 from pandas import DataFrame
 from typing import List, Dict, Any
-from sqlalchemy import MetaData, Table, select, func, desc, update, create_engine
+from sqlalchemy import MetaData, Table, select, func, desc, update, or_
 from sqlalchemy.engine import Engine
 from datetime import datetime
 
@@ -115,7 +115,7 @@ class DatabaseQueries:
                 self.book.columns.author,
                 self.book_category.columns.name,
                 self.review.columns.book_id,
-                func.sum(self.review.columns.rating).label('total_rating')
+                func.avg(self.review.columns.rating).label('total_rating')
             ])
             .select_from(
                 self.book
@@ -155,7 +155,12 @@ class DatabaseQueries:
                 .join(self.book_category, self.book_category.columns.id == self.book.columns.category_id)
             )
             .where(self.user.columns.username == username)
-            .where(self.readership_status.columns.status == 'READ')
+            .where(
+                or_(
+                    self.readership_status.columns.status == 'READ',
+                    self.readership_status.columns.status == 'REVIEWED'
+                )
+            )
         )
         return pd.DataFrame(self.engine.execute(stmt).fetchall()).to_dict(orient='records')
 
