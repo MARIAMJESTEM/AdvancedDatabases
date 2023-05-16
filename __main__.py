@@ -17,8 +17,6 @@ search_term = ""
 def home():
     top10Books = query.get_top_rated_books(10)  # function return pd.DataFrame
     global LoggedIn
-    data = [['title', 'author', 'genre', '1'],['title', 'author', 'genre', '1'],['title', 'author', 'genre', '1'],['title', 'author', 'genre', '1'],['title', 'author', 'genre', '1'],['title', 'author', 'genre', '1'],['title', 'author', 'genre', '1'],['title', 'author', 'genre', '1'],['title', 'author', 'genre', '1'],['title', 'author', 'genre', '1'],['title', 'author', 'genre', '1']]
-    top10Books = pd.DataFrame(data, columns=['title', 'author', 'name', 'total_rating'])
     if request.method == 'POST':
         if "action" in request.form and request.form["action"] == "LogOut":
             LoggedIn = False
