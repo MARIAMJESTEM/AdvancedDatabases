@@ -12,3 +12,10 @@
 
 ## Running:
 - API + Web server: `python __main__.py`
+
+
+## Contributors:
+- [Maria Mazur](https://github.com/MARIAMJESTEM) - API and Web Server
+- [Bartosz Sroka](https://github.com/Sroka-Bartosz) - Database Queries Support
+- [Norbert Podgórski](https://github.com/Norbert-Podgorski) - Database Architecture
+- [Filip Gąciarz](https://github.com/Filipsss13524) - Dataset Selection and Data Loading
