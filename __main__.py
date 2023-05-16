@@ -102,7 +102,7 @@ def userreview():
         review = request.form['description']
         rating = float(request.form['quantity'])
 
-        isTitleInDB = False  # Here assign the response from data base
+        isTitleInDB = query.check_book_exists(book_title=title)
         if isTitleInDB:
             flash('Given book title is already commented!')
             return redirect(url_for('userreview'))

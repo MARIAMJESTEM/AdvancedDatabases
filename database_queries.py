@@ -37,6 +37,19 @@ class DatabaseQueries:
         )
         return True if self.engine.execute(stmt).fetchall() else False
 
+    def check_book_exists(self, book_title: str) -> bool:
+        """
+        Check if book with selected title exists in the database.
+
+        :param book_title: The title of the book to check
+        :return: True if the book exists in the database, False otherwise.
+        """
+        stmt = (
+            select([self.book])
+            .where(func.lower(self.book.columns.title) == book_title.lower())
+        )
+        return True if self.engine.execute(stmt).fetchall() else False
+
     def check_is_username_taken(self, username: str) -> bool:
         """
         Check if the given username was taken in the database.
