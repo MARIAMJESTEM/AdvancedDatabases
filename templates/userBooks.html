@@ -52,16 +52,10 @@
       <span></span>
       <label style="color: antiquewhite; font-size: 18px">Title</label>
     </div>
-    <!--<div class="txt_field">
-      <input type="number" id="quantity" name="quantity" min="1" max="5" />
-      <span></span>
-      <label style="color: antiquewhite; font-size: 18px">Rating</label>
-    </div> -->
     <input type="submit" class="submit2" value="Add" />
   </form>
 </div>
 
-<!-- Page content -->
 <div class="main2">
   <h1 class="h1_books">Books you have already read</h1>
   <hr style="border: 2px" />
@@ -70,13 +64,14 @@
   <script>
     const data = {{ data | tojson }};
     const columns = {{ columns | tojson }};
+    const columnNames = {{ columnNamesToShow | tojson}};
 
     function generateTable(data, columns) {
       const table = document.createElement('table');
       const headerRow = document.createElement('tr');
 
       // Create the header row
-      for (let col of columns) {
+      for (let col of columnsNames) {
         const th = document.createElement('th');
         th.textContent = col;
         headerRow.appendChild(th);

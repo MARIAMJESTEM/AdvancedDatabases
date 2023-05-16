@@ -5,7 +5,7 @@ from sqlalchemy import create_engine
 from database_queries import DatabaseQueries
 from flask import Flask, render_template, request, flash, redirect, url_for
 app = Flask(__name__)
-
+import pandas as pd
 app.config['SECRET_KEY'] = '27ba51b46332c22d3005b6534d881908'
 LoggedIn = False
 usernameDB = ""
@@ -17,6 +17,8 @@ search_term = ""
 def home():
     top10Books = query.get_top_rated_books(10)  # function return pd.DataFrame
     global LoggedIn
+    data = [['title', 'author', 'genre', '1'],['title', 'author', 'genre', '1'],['title', 'author', 'genre', '1'],['title', 'author', 'genre', '1'],['title', 'author', 'genre', '1'],['title', 'author', 'genre', '1'],['title', 'author', 'genre', '1'],['title', 'author', 'genre', '1'],['title', 'author', 'genre', '1'],['title', 'author', 'genre', '1'],['title', 'author', 'genre', '1']]
+    top10Books = pd.DataFrame(data, columns=['title', 'author', 'name', 'total_rating'])
     if request.method == 'POST':
         if "action" in request.form and request.form["action"] == "LogOut":
             LoggedIn = False
@@ -71,20 +73,25 @@ def userbooks():
     global usernameDB
     data = query.get_user_read_books(username=usernameDB)
     columns = ["title", "author", "genre", "release_year"]
+    columnNamesToShow = ["Title", "Author", "Genre", "Release year"]
 
     if request.method == 'POST':
         if "action" in request.form and request.form["action"] == "LogOut":
             LoggedIn = False
             return redirect(url_for('home'))
         title = request.form['title']
-
-        isTitleInDB = query.check_is_title_in_user_database(username=usernameDB, book_title=title)
+        isTitleInDB = not query.check_book_exists(book_title=title)
         if isTitleInDB:
-            flash('Given book title is already added to your list!')
+            flash('Given book title does not exist!')
             return redirect(url_for('userbooks'))
         else:
-            query.add_read_book_to_user_list(username=usernameDB, book_title=title)
-    return render_template('userBooks.html', LoggedIn=LoggedIn, data=data, columns=columns)
+            isTitleInUserDB = query.check_is_title_in_user_database(username=usernameDB, book_title=title)
+            if isTitleInUserDB:
+                flash('Given book title is already added to your list!')
+                return redirect(url_for('userbooks'))
+            else:
+                query.add_read_book_to_user_list(username=usernameDB, book_title=title)
+    return render_template('userBooks.html', LoggedIn=LoggedIn, data=data, columns=columns, columnNamesToShow=columnNamesToShow)
 
 
 @app.route("/userreviews", methods=['GET', 'POST'])
@@ -102,9 +109,9 @@ def userreview():
         review = request.form['description']
         rating = float(request.form['quantity'])
 
-        isTitleInDB = query.check_book_exists(book_title=title)
+        isTitleInDB = not query.check_book_exists(book_title=title)
         if isTitleInDB:
-            flash('Given book title is already commented!')
+            flash('Given book title does not  exist!')
             return redirect(url_for('userreview'))
         else:
             query.add_review_to_user_book(username=usernameDB, book_title=title, rating=rating, comment=review)
@@ -138,7 +145,7 @@ def search_negative():
     return render_template('search_negative.html', LoggedIn=LoggedIn, search=search_term)
 
 if __name__ == '__main__':
-    db_string = "postgresql://postgres:postgres@localhost:5432/advanced_databases"
+    db_string = "postgresql://postgres:postgres@localhost:5433/advanced_databases"
     engine = create_engine(db_string)
     query = DatabaseQueries(engine)
     app.run(debug=True)
