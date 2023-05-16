@@ -1,7 +1,7 @@
 from faker import Faker
 from random import uniform
 from sqlalchemy import create_engine
-from database_queries import DatabaseQueries
+from database.database_queries import DatabaseQueries
 import numpy as np
 
 
@@ -89,7 +89,7 @@ class DatabaseDataGenerator:
                                                comment=Faker().text(max_nb_chars=200))
 
 
-if __name__ == "__main__":
+def generate_sample_data():
     db_string = "postgresql://postgres:postgres@localhost:5432/advanced_databases"
     engine = create_engine(db_string)
     DDG = DatabaseDataGenerator(DatabaseQueries(engine))

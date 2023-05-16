@@ -2,7 +2,6 @@ import pandas as pd
 import numpy as np
 from faker import Faker
 from sqlalchemy import create_engine, Table, Column, Integer, String, MetaData
-import database_architecture
 from sqlalchemy.engine import Engine
 
 
@@ -24,7 +23,7 @@ class DatabaseUpload:
 
         self.book_df.id = self.book_df.id.astype('int64')
         self.book_df.release_year = self.book_df.release_year.astype('int64')
-        self.book_df.to_sql('book', con=engine, if_exists='append', index=False)
+        self.book_df.to_sql('book', con=self.engine, if_exists='append', index=False)
 
     def upload_category_data(self):
         self.category_df['name'] = self.category_df['name'].apply(lambda x: x[:20])
@@ -32,8 +31,8 @@ class DatabaseUpload:
         self.category_df.to_sql('book_category', con=self.engine, if_exists='append', index=False)
 
 
-if __name__ == "__main__":
+def fill_database_with_data():
     db_string = "postgresql://postgres:postgres@localhost:5432/advanced_databases"
     engine = create_engine(db_string)
-    DU = DatabaseUpload(engine, 'data/books_v2.csv', 'data/category.csv')
+    DU = DatabaseUpload(engine, 'database/data/books_v2.csv', 'database/data/category.csv')
     DU.upload_data()

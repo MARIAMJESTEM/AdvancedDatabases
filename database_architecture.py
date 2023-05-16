@@ -1,6 +1,8 @@
 from sqlalchemy import Column, Integer, String, Date, Float, ForeignKey
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
+from database.database_csv import fill_database_with_data
+from database.database_sample_data_generator import generate_sample_data
 
 db_string = "postgresql://postgres:postgres@localhost:5432/advanced_databases"
 engine = create_engine(db_string)
@@ -96,3 +98,6 @@ class ReadershipStatus(Base):
 
 if __name__ == "__main__":
     Base.metadata.create_all(engine)
+    fill_database_with_data()
+    generate_sample_data()
+
