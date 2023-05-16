@@ -8,9 +8,11 @@ def make_book_and_category_database(data):
     df = pd.read_csv(data, usecols=usecols, sep=';')
     df.rename(columns={"categories": "category_id", "authors": "author", "published_year": "release_year"},
               inplace=True)
-    # drop all nan
+
+    # Removes all NaN from data
     df.dropna(inplace=True, ignore_index=True)
 
+    # Removes elements that exceed the scope of the architecture
     drop_list = []
     for i in range(len(df)):
         if len(df['title'][i]) > 30 or len(df['author'][i]) > 30 or len(df['description'][i]) > 400:
@@ -19,12 +21,18 @@ def make_book_and_category_database(data):
     df.drop(drop_list, axis=0, inplace=True)
     df = df.reset_index(drop=True)
 
+    # Maps categories to id
     category = pd.unique(df['category_id'])
     map_list = {a: b for a, b in zip(category, range(1, len(category) + 1))}  # map category
     df['category_id'] = df['category_id'].map(map_list)
+
+    # Append new column id
     df.insert(0, "id", np.linspace(1, len(df), num=len(df)))
+
+    # Changes the order of the columns in the table
     df = df[['id', 'category_id', 'title', 'author', 'description', 'release_year']]
 
+    # Changes the data type
     df.id = df.id.astype('int64')
     df.release_year = df.release_year.astype('int64')
     df.to_csv('data/books_v2.csv', index=False)
