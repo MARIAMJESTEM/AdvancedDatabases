@@ -5,7 +5,6 @@ from sqlalchemy import create_engine
 from database.database_queries import DatabaseQueries
 from flask import Flask, render_template, request, flash, redirect, url_for
 app = Flask(__name__)
-import pandas as pd
 app.config['SECRET_KEY'] = '27ba51b46332c22d3005b6534d881908'
 LoggedIn = False
 usernameDB = ""
@@ -89,6 +88,7 @@ def userbooks():
                 return redirect(url_for('userbooks'))
             else:
                 query.add_read_book_to_user_list(username=usernameDB, book_title=title)
+    data = query.get_user_read_books(username=usernameDB)
     return render_template('userBooks.html', LoggedIn=LoggedIn, data=data, columns=columns, columnNamesToShow=columnNamesToShow)
 
 
@@ -98,6 +98,7 @@ def userreview():
     global usernameDB
     data = query.get_user_reviews(username=usernameDB)
     columns = ["title", "rating", "comment"]
+    columnNamesToShow = ['Title', 'Rating', 'Comment']
 
     if request.method == 'POST':
         if "action" in request.form and request.form["action"] == "LogOut":
@@ -113,7 +114,8 @@ def userreview():
             return redirect(url_for('userreview'))
         else:
             query.add_review_to_user_book(username=usernameDB, book_title=title, rating=rating, comment=review)
-    return render_template('userReviews.html', LoggedIn=LoggedIn, data=data, columns=columns)
+    data = query.get_user_reviews(username=usernameDB)
+    return render_template('userReviews.html', LoggedIn=LoggedIn, data=data, columns=columns, columnNamesToShow=columnNamesToShow)
 
 
 @app.route("/search", methods=['GET', 'POST'])
