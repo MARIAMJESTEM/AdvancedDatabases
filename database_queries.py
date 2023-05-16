@@ -300,6 +300,22 @@ class DatabaseQueries:
         )
         return self.engine.execute(stmt).fetchall()[0][0]
 
+    def get_random_book_title(self) -> str:
+        stmt = (
+            select([self.book.columns.title])
+            .order_by(func.random())
+            .limit(1)
+        )
+        return self.engine.execute(stmt).fetchall()[0][0]
+
+    def get_random_username(self) -> str:
+        stmt = (
+            select([self.user.columns.username])
+            .order_by(func.random())
+            .limit(1)
+        )
+        return self.engine.execute(stmt).fetchall()[0][0]
+
     def add_new_user_to_database(self, username: str, password: str, email: str) -> None:
         """
         Add a new user to the database.
