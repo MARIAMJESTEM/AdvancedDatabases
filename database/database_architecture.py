@@ -29,7 +29,7 @@ class User(Base):
 class BookCategory(Base):
     __tablename__ = 'book_category'
     id = Column(Integer, primary_key=True)
-    name = Column(String(20))
+    name = Column(String(40))
     description = Column(String(200))
 
     def __repr__(self):
@@ -40,9 +40,9 @@ class Book(Base):
     __tablename__ = 'book'
     id = Column(Integer, primary_key=True)
     category_id = Column(Integer, ForeignKey('book_category.id'))
-    title = Column(String(150))
-    author = Column(String(100))
-    description = Column(String(6000))
+    title = Column(String(40))
+    author = Column(String(40))
+    description = Column(String(400))
     release_year = Column(Integer)
     
     def __repr__(self):
