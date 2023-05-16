@@ -1,0 +1,50 @@
+{% extends "layout.html" %} {% block userTabs %} {% if LoggedIn %}
+<li class="nav-item">
+  <a class="nav-link active mr-4" aria-current="page" href="/userbooks">
+    <i class="bi bi-book"></i>&nbsp;My Books</a
+  >
+</li>
+<li class="nav-item">
+  <a class="nav-link active" aria-current="page" href="/userreviews"
+    ><i class="bi bi-pen"></i>&nbsp;My Reviews</a
+  >
+</li>
+{% endif %} {% endblock %} {% block login_button %} {% if LoggedIn %}
+<div class="d-flex ml-5">
+  <form method="post" action="/search_negative">
+    <input
+      type="submit"
+      name="action"
+      value="LogOut"
+      class="btn btn-outline-primary"
+    />
+  </form>
+</div>
+{% else %}
+<div class="d-flex ml-5">
+  <button
+    class="btn btn-outline-primary"
+    type="button"
+    onclick="window.location.href='/login'"
+  >
+    Log In
+  </button>
+  <button
+    class="btn btn-outline-primary"
+    type="button"
+    onclick="window.location.href='/signin'"
+    style="margin-right: 10px"
+  >
+    Sign In
+  </button>
+</div>
+{% endif %} {% endblock %} {% block content %}
+<main class="custom-container">
+  <div class="container2">
+  <h1 class = "search_h1">Oh no! We couldn't find single match for <strong>{{search}}</strong>.</i></h1>
+  <br>
+  <h2 style="margin-left: 290px;"> Try different book title </h2>
+  <hr>
+  <hr>
+</main>
+{% endblock %}

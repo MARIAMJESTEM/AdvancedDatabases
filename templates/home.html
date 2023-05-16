@@ -61,11 +61,13 @@
         class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative"
       >
         <div class="col p-4 d-flex flex-column position-static">
-          <strong class="d-inline-block mb-2 text-primary">Genre</strong>
-          <h3 class="mb-0">{{top10Books[0][0]}}</h3>
+          <strong class="d-inline-block mb-2 text-success"
+            >{{top10Books.name[0]}}</strong
+          >
+          <h3 class="mb-0">{{top10Books.title[0]}}</h3>
           <br />
           <p class="card-text mb-auto">
-            Author, maybe some more data, depends what we have in DB
+            Author of the book: {{top10Books.author[0]}}
           </p>
         </div>
         <div class="col-auto d-none d-lg-block">
@@ -81,7 +83,9 @@
           >
             <title>Placeholder</title>
             <rect width="100%" height="100%" fill="#4080b8" />
-            <text x="40%" y="50%" fill="#eceeef" dy=".4em">Rating</text>
+            <text x="40%" y="50%" fill="#eceeef" dy=".4em">
+              {{top10Books.total_rating[0]}}/5
+            </text>
           </svg>
         </div>
       </div>
@@ -91,11 +95,13 @@
         class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative"
       >
         <div class="col p-4 d-flex flex-column position-static">
-          <strong class="d-inline-block mb-2 text-primary">Genre</strong>
-          <h3 class="mb-0">Book Title 2</h3>
+          <strong class="d-inline-block mb-2 text-success"
+            >{{top10Books.name[1]}}</strong
+          >
+          <h3 class="mb-0">{{top10Books.title[1]}}</h3>
           <br />
           <p class="card-text mb-auto">
-            Author, maybe some more data, depends what we have in DB
+            Author of the book: {{top10Books.author[1]}}
           </p>
         </div>
         <div class="col-auto d-none d-lg-block">
@@ -111,69 +117,9 @@
           >
             <title>Placeholder</title>
             <rect width="100%" height="100%" fill="#4080b8" />
-            <text x="40%" y="50%" fill="#eceeef" dy=".3em">Rating</text>
-          </svg>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row mb-2">
-    <div class="col-md-6">
-      <div
-        class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative"
-      >
-        <div class="col p-4 d-flex flex-column position-static">
-          <strong class="d-inline-block mb-2 text-primary">Genre</strong>
-          <h3 class="mb-0">Book Title 1</h3>
-          <br />
-          <p class="card-text mb-auto">
-            Author, maybe some more data, depends what we have in DB
-          </p>
-        </div>
-        <div class="col-auto d-none d-lg-block">
-          <svg
-            class="bd-placeholder-img"
-            width="200"
-            height="250"
-            xmlns="http://www.w3.org/2000/svg"
-            role="img"
-            aria-label="Placeholder: Thumbnail"
-            preserveAspectRatio="xMidYMid slice"
-            focusable="false"
-          >
-            <title>Placeholder</title>
-            <rect width="100%" height="100%" fill="#4080b8" />
-            <text x="40%" y="50%" fill="#eceeef" dy=".3em">Rating</text>
-          </svg>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div
-        class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative"
-      >
-        <div class="col p-4 d-flex flex-column position-static">
-          <strong class="d-inline-block mb-2 text-primary">Genre</strong>
-          <h3 class="mb-0">Book Title 2</h3>
-          <br />
-          <p class="card-text mb-auto">
-            Author, maybe some more data, depends what we have in DB
-          </p>
-        </div>
-        <div class="col-auto d-none d-lg-block">
-          <svg
-            class="bd-placeholder-img"
-            width="200"
-            height="250"
-            xmlns="http://www.w3.org/2000/svg"
-            role="img"
-            aria-label="Placeholder: Thumbnail"
-            preserveAspectRatio="xMidYMid slice"
-            focusable="false"
-          >
-            <title>Placeholder</title>
-            <rect width="100%" height="100%" fill="#4080b8" />
-            <text x="40%" y="50%" fill="#eceeef" dy=".3em">Rating</text>
+            <text x="40%" y="50%" fill="#eceeef" dy=".3em">
+              {{top10Books.total_rating[1]}}/5
+            </text>
           </svg>
         </div>
       </div>
@@ -185,11 +131,13 @@
         class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative"
       >
         <div class="col p-4 d-flex flex-column position-static">
-          <strong class="d-inline-block mb-2 text-primary">Genre</strong>
-          <h3 class="mb-0">Book Title 1</h3>
+          <strong class="d-inline-block mb-2 text-success"
+            >{{top10Books.name[2]}}</strong
+          >
+          <h3 class="mb-0">{{top10Books.title[2]}}</h3>
           <br />
           <p class="card-text mb-auto">
-            Author, maybe some more data, depends what we have in DB
+            Author of the book: {{top10Books.author[2]}}
           </p>
         </div>
         <div class="col-auto d-none d-lg-block">
@@ -205,7 +153,9 @@
           >
             <title>Placeholder</title>
             <rect width="100%" height="100%" fill="#4080b8" />
-            <text x="40%" y="50%" fill="#eceeef" dy=".3em">Rating</text>
+            <text x="40%" y="50%" fill="#eceeef" dy=".3em">
+              {{top10Books.total_rating[2]}}/5
+            </text>
           </svg>
         </div>
       </div>
@@ -215,11 +165,13 @@
         class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative"
       >
         <div class="col p-4 d-flex flex-column position-static">
-          <strong class="d-inline-block mb-2 text-primary">Genre</strong>
-          <h3 class="mb-0">Book Title 2</h3>
+          <strong class="d-inline-block mb-2 text-success"
+            >{{top10Books.name[3]}}</strong
+          >
+          <h3 class="mb-0">{{top10Books.title[3]}}</h3>
           <br />
           <p class="card-text mb-auto">
-            Author, maybe some more data, depends what we have in DB
+            Author of the book: {{top10Books.author[3]}}
           </p>
         </div>
         <div class="col-auto d-none d-lg-block">
@@ -235,7 +187,9 @@
           >
             <title>Placeholder</title>
             <rect width="100%" height="100%" fill="#4080b8" />
-            <text x="40%" y="50%" fill="#eceeef" dy=".3em">Rating</text>
+            <text x="40%" y="50%" fill="#eceeef" dy=".3em">
+              {{top10Books.total_rating[3]}}/5
+            </text>
           </svg>
         </div>
       </div>
@@ -247,11 +201,13 @@
         class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative"
       >
         <div class="col p-4 d-flex flex-column position-static">
-          <strong class="d-inline-block mb-2 text-primary">Genre</strong>
-          <h3 class="mb-0">Book Title 1</h3>
+          <strong class="d-inline-block mb-2 text-success"
+            >{{top10Books.name[4]}}</strong
+          >
+          <h3 class="mb-0">{{top10Books.title[4]}}</h3>
           <br />
           <p class="card-text mb-auto">
-            Author, maybe some more data, depends what we have in DB
+            Author of the book: {{top10Books.author[4]}}
           </p>
         </div>
         <div class="col-auto d-none d-lg-block">
@@ -267,7 +223,9 @@
           >
             <title>Placeholder</title>
             <rect width="100%" height="100%" fill="#4080b8" />
-            <text x="40%" y="50%" fill="#eceeef" dy=".3em">Rating</text>
+            <text x="40%" y="50%" fill="#eceeef" dy=".3em">
+              {{top10Books.total_rating[4]}}/5
+            </text>
           </svg>
         </div>
       </div>
@@ -277,11 +235,13 @@
         class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative"
       >
         <div class="col p-4 d-flex flex-column position-static">
-          <strong class="d-inline-block mb-2 text-primary">Genre</strong>
-          <h3 class="mb-0">Book Title 2</h3>
+          <strong class="d-inline-block mb-2 text-success"
+            >{{top10Books.name[5]}}</strong
+          >
+          <h3 class="mb-0">{{top10Books.title[5]}}</h3>
           <br />
           <p class="card-text mb-auto">
-            Author, maybe some more data, depends what we have in DB
+            Author of the book: {{top10Books.author[5]}}
           </p>
         </div>
         <div class="col-auto d-none d-lg-block">
@@ -297,7 +257,79 @@
           >
             <title>Placeholder</title>
             <rect width="100%" height="100%" fill="#4080b8" />
-            <text x="40%" y="50%" fill="#eceeef" dy=".3em">Rating</text>
+            <text x="40%" y="50%" fill="#eceeef" dy=".3em">
+              {{top10Books.total_rating[5]}}/5
+            </text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mb-2">
+    <div class="col-md-6">
+      <div
+        class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative"
+      >
+        <div class="col p-4 d-flex flex-column position-static">
+          <strong class="d-inline-block mb-2 text-success"
+            >{{top10Books.name[6]}}</strong
+          >
+          <h3 class="mb-0">{{top10Books.title[6]}}</h3>
+          <br />
+          <p class="card-text mb-auto">
+            Author of the book: {{top10Books.author[6]}}
+          </p>
+        </div>
+        <div class="col-auto d-none d-lg-block">
+          <svg
+            class="bd-placeholder-img"
+            width="200"
+            height="250"
+            xmlns="http://www.w3.org/2000/svg"
+            role="img"
+            aria-label="Placeholder: Thumbnail"
+            preserveAspectRatio="xMidYMid slice"
+            focusable="false"
+          >
+            <title>Placeholder</title>
+            <rect width="100%" height="100%" fill="#4080b8" />
+            <text x="40%" y="50%" fill="#eceeef" dy=".3em">
+              {{top10Books.total_rating[6]}}/5
+            </text>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div
+        class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative"
+      >
+        <div class="col p-4 d-flex flex-column position-static">
+          <strong class="d-inline-block mb-2 text-success"
+            >{{top10Books.name[7]}}</strong
+          >
+          <h3 class="mb-0">{{top10Books.title[7]}}</h3>
+          <br />
+          <p class="card-text mb-auto">
+            Author of the book: {{top10Books.author[7]}}
+          </p>
+        </div>
+        <div class="col-auto d-none d-lg-block">
+          <svg
+            class="bd-placeholder-img"
+            width="200"
+            height="250"
+            xmlns="http://www.w3.org/2000/svg"
+            role="img"
+            aria-label="Placeholder: Thumbnail"
+            preserveAspectRatio="xMidYMid slice"
+            focusable="false"
+          >
+            <title>Placeholder</title>
+            <rect width="100%" height="100%" fill="#4080b8" />
+            <text x="40%" y="50%" fill="#eceeef" dy=".3em">
+              {{top10Books.total_rating[7]}}/5
+            </text>
           </svg>
         </div>
       </div>
@@ -310,13 +342,14 @@
         class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative"
       >
         <div class="col p-4 d-flex flex-column position-static">
-          <strong class="d-inline-block mb-2 text-primary">Genre</strong>
-          <h3 class="mb-0">Book title 10</h3>
+          <strong class="d-inline-block mb-2 text-success"
+            >{{top10Books.name[8]}}</strong
+          >
+          <h3 class="mb-0">{{top10Books.title[8]}}</h3>
           <br />
           <p class="card-text mb-auto">
-            Author, maybe some more data, depends what we have in DB
+            Author of the book: {{top10Books.author[8]}}
           </p>
-          <a href="#" class="stretched-link">Continue reading</a>
         </div>
         <div class="col-auto d-none d-lg-block">
           <svg
@@ -331,7 +364,9 @@
           >
             <title>Placeholder</title>
             <rect width="100%" height="100%" fill="#4080b8" />
-            <text x="40%" y="50%" fill="#eceeef" dy=".3em">rating</text>
+            <text x="40%" y="50%" fill="#eceeef" dy=".3em">
+              {{top10Books.total_rating[8]}}/5
+            </text>
           </svg>
         </div>
       </div>
@@ -341,14 +376,11 @@
         class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative"
       >
         <div class="col p-4 d-flex flex-column position-static">
-          <strong class="d-inline-block mb-2 text-success">Design</strong>
-          <h3 class="mb-0">Post title</h3>
-          <div class="mb-1 text-body-secondary">Nov 11</div>
-          <p class="mb-auto">
-            This is a wider card with supporting text below as a natural lead-in
-            to additional content.
-          </p>
-          <a href="#" class="stretched-link">Continue reading</a>
+          <strong class="d-inline-block mb-2 text-success"
+            >{{top10Books.name[9]}}</strong
+          >
+          <h3 class="mb-0">{{top10Books.title[9]}}</h3>
+          <p class="mb-auto">Author of the book: {{top10Books.author[9]}}</p>
         </div>
         <div class="col-auto d-none d-lg-block">
           <svg
@@ -363,7 +395,9 @@
           >
             <title>Placeholder</title>
             <rect width="100%" height="100%" fill="#4080b8" />
-            <text x="40%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
+            <text x="40%" y="50%" fill="#eceeef" dy=".3em">
+              {{top10Books.total_rating[9]}}/5
+            </text>
           </svg>
         </div>
       </div>
