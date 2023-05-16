@@ -2,7 +2,7 @@ import json
 import os
 from typing import List, Any, cast
 from sqlalchemy import create_engine
-from database_queries import DatabaseQueries
+from database.database_queries import DatabaseQueries
 from flask import Flask, render_template, request, flash, redirect, url_for
 app = Flask(__name__)
 import pandas as pd
