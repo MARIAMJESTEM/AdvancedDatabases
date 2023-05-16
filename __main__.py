@@ -145,7 +145,7 @@ def search_negative():
     return render_template('search_negative.html', LoggedIn=LoggedIn, search=search_term)
 
 if __name__ == '__main__':
-    db_string = "postgresql://postgres:postgres@localhost:5433/advanced_databases"
+    db_string = "postgresql://postgres:postgres@localhost:5432/advanced_databases"
     engine = create_engine(db_string)
     query = DatabaseQueries(engine)
     app.run(debug=True)
