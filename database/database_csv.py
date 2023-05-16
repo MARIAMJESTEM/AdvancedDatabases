@@ -35,5 +35,5 @@ class DatabaseUpload:
 if __name__ == "__main__":
     db_string = "postgresql://postgres:postgres@localhost:5432/advanced_databases"
     engine = create_engine(db_string)
-    DU = DatabaseUpload(engine, 'books_v2.csv', 'category.csv')
+    DU = DatabaseUpload(engine, 'data/books_v2.csv', 'data/category.csv')
     DU.upload_data()
