@@ -392,7 +392,7 @@ class DatabaseQueries:
             raise ValueError("ERROR: Rating value must be between 0 and 5.")
 
         new_review_id = self.get_new_review_id()
-
+        self.add_read_book_to_user_list(username=username, book_title=book_title)
         self.add_new_review(review_id=new_review_id,
                             user_id=self.get_user_id(username),
                             book_id=self.get_book_id(book_title),

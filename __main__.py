@@ -127,12 +127,24 @@ def search():
             LoggedIn = False
             return redirect(url_for('search'))
         search_term = request.form['search']
-        try:
-            bookData = query.get_search_book_by_title(book_title=search_term)
-        except Exception as e:
-           return render_template('search_negative.html', LoggedIn=LoggedIn, search=search_term) 
-        reviews = query.get_book_reviews(book_title=search_term)
-    return render_template('search.html', LoggedIn=LoggedIn, Reviews=reviews, bookData=bookData)
+        searchResult = query.get_search_books_by_title_part(book_title_part = search_term, max_found_books= 10)
+        if len(searchResult) == 0:
+            return redirect(url_for('search_negative')) 
+    return render_template('search.html', LoggedIn=LoggedIn, searchResults=searchResult)
+
+@app.route("/searchResult", methods=['GET', 'POST'])
+def searchResult():
+    global LoggedIn
+    global search_term
+    if request.method == 'POST':
+        if "action" in request.form and request.form["action"] == "LogOut":
+            LoggedIn = False
+            return redirect(url_for('searchResult'))
+    search_term = request.args.get('result')
+    search_term2 = search_term[0]
+    reviews = query.get_book_reviews(book_title=search_term)
+    bookData = query.get_search_book_by_title(book_title=search_term)
+    return render_template('searchResult.html', LoggedIn=LoggedIn, Reviews=reviews, bookData=bookData)
 
 @app.route("/search_negative", methods=['GET', 'POST'])
 def search_negative():
@@ -143,6 +155,7 @@ def search_negative():
             LoggedIn = False
             return redirect(url_for('search_negative'))
     return render_template('search_negative.html', LoggedIn=LoggedIn, search=search_term)
+
 
 if __name__ == '__main__':
     db_string = "postgresql://postgres:postgres@localhost:5432/advanced_databases"
