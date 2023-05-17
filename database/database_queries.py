@@ -227,7 +227,7 @@ class DatabaseQueries:
 
     def get_search_book_by_title(self, book_title: str) -> List[Any]:
         """
-        Searches for books in the database that match the given title.
+        Searches for book in the database that match the given title.
 
         :param book_title: The title of the book to search for.
         :return: A list containing information about the matching books, where each item in the list is a tuple with the
@@ -251,6 +251,32 @@ class DatabaseQueries:
         if not book_information:
             raise ValueError(f"ERROR: no book with the given title was found: '{book_title}'")
         return list(book_information[0])
+
+    def get_search_books_by_title_part(self, book_title_part: str, max_found_books: int) -> List[Dict]:
+        """
+        Search for all books matching the part of the title.
+
+        :param book_title_part: The part of the book title to search for.
+        :param max_found_books: The maximum number of books to be returned.
+        :return: A list containing information about the books that contain the part of the book title.
+                 Each item in the list is a dictionary with the following keys: 'title', 'author', 'description',
+                 'release_year', 'category_name'.
+        """
+        stmt = (
+            select([
+                self.book.columns.title,
+                self.book.columns.author,
+                self.book.columns.description,
+                self.book.columns.release_year,
+                self.book_category.columns.name
+            ])
+            .select_from(
+                self.book.join(self.book_category, self.book.columns.category_id == self.book_category.columns.id)
+            )
+            .where(self.book.columns.title.ilike(f'%{book_title_part}%'))
+            .limit(max_found_books)
+        )
+        return pd.DataFrame(self.engine.execute(stmt).fetchall()).to_dict(orient='records')
 
     def get_new_user_id(self) -> int:
         """
