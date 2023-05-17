@@ -32,7 +32,7 @@ class User(Base):
 class BookCategory(Base):
     __tablename__ = 'book_category'
     id = Column(Integer, primary_key=True)
-    name = Column(String(40))
+    name = Column(String(50))
     description = Column(String(200))
 
     def __repr__(self):
